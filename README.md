@@ -40,7 +40,7 @@ createEmpties {n = (S k)} = [] :: createEmpties
 
 
 
-3. Data Types
+3. Basic Data Types
 
 ```haskell
 -- enumerated types (enum)
@@ -51,6 +51,10 @@ data Direction = North | East | South | West
 data Shape = Triangle Double Double
 			| Rectangle Double Double
 			| Circle Double
+data Shape: Type where
+	Triangle: Double -> Double -> Shape
+	Rectangle: Double -> Double -> Shape
+	Circle: Double -> Shape
 			
 -- recursive types (self-defining types)
 data Nat = Z | S Nat
@@ -71,5 +75,27 @@ insert x orgi@(Node left val right)
 		LT => Node (insert x left) val right
 		EQ => orig
 		GT => Node left val (insert x right)
+```
+
+
+
+5. Dependent Data Types
+
+```haskell
+data PowerSouce = Petrol | Pedal
+
+data Vehicle: PowerSource -> Type where		-- dependent types / families of types
+	Bicycle: Vehicle Pedal
+	Car: (fuel: Nat) -> Vehicle Petrol
+	Bus: (fuel: Nat) -> Vehicle Petrol
+	
+data Vect: Nat -> Type -> Type where
+	Nil: Vect Z a
+	(::): (x: a) -> (xs: Vect k a) -> Vect (S k) a
+	
+data DataStore: Type where
+	MkData: (size: Nat) ->
+		    (items: Vect size String) ->	-- computation from parameters
+		    DataStore
 ```
 
