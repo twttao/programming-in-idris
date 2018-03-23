@@ -70,7 +70,7 @@ data Either a b = Left a | Right b
 4. Pattern Naming and Reuse
 
 ```haskell
-insert x orgi@(Node left val right)
+insert x orig@(Node left val right)
 	= case compare x val of
 		LT => Node (insert x left) val right
 		EQ => orig
