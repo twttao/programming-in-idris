@@ -2,7 +2,7 @@
 
 
 
-1. Implicit Argument
+#####Implicit Argument
 
 ```haskell
 -- explicit
@@ -20,7 +20,7 @@ append: {elem: Type} -> {n: Nat} -> {m: Nat} ->
 
 
 
-2. Use Implicit in Function
+##### Use Implicit in Function
 
 ```haskell
 -- plain
@@ -40,7 +40,7 @@ createEmpties {n = (S k)} = [] :: createEmpties
 
 
 
-3. Basic Data Types
+##### Basic Data Types
 
 ```haskell
 -- enumerated types (enum)
@@ -67,7 +67,7 @@ data Either a b = Left a | Right b
 
 
 
-4. Pattern Naming and Reuse
+##### Pattern Naming and Reuse
 
 ```haskell
 insert x orig@(Node left val right)
@@ -79,7 +79,7 @@ insert x orig@(Node left val right)
 
 
 
-5. Dependent Data Types
+##### Dependent Data Types
 
 ```haskell
 data PowerSouce = Petrol | Pedal
@@ -97,5 +97,34 @@ data DataStore: Type where
 	MkData: (size: Nat) ->
 		    (items: Vect size String) ->	-- computation from parameters
 		    DataStore
+```
+
+
+
+##### Dependent Pairs
+
+```haskell
+anyVect: (n: Nat ** Vect n String)		-- second element computed from the first
+anyVect: (n ** Vect n String)			-- type inference
+```
+
+
+
+##### Type-level Calculation
+
+```haskell
+-- type calculation functions
+StringOrInt: Bool -> Type
+StringOrInt False = String
+StringOrInt True = Int
+-- usage
+getStringOrInt: (isInt: Bool) -> StringOrInt isInt
+getStringOrInt False = "Ninety Four"
+getStringOrInt True = 94
+
+-- or use case expression directly
+valToString': (isInt: Bool) -> (case isInt of False => String True => Int) -> String
+valToString' False y = trim y
+valToString' True y = cast y
 ```
 
