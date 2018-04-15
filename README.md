@@ -2,7 +2,7 @@
 
 
 
-#####Implicit Argument
+##### Implicit Argument
 
 ```haskell
 -- explicit
