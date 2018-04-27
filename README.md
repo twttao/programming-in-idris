@@ -113,7 +113,7 @@ anyVect: (n ** Vect n String)			-- type inference
 ##### Type-level Calculation
 
 ```haskell
--- type calculation functions
+	-- type calculation functions
 StringOrInt: Bool -> Type
 StringOrInt False = String
 StringOrInt True = Int
@@ -126,5 +126,27 @@ getStringOrInt True = 94
 valToString': (isInt: Bool) -> (case isInt of False => String True => Int) -> String
 valToString' False y = trim y
 valToString' True y = cast y
+```
+
+
+
+##### Interfaces
+
+```haskell
+Eq Matter where
+		(==) Solid Solid = True
+		(==) Liquid Liquid = True
+		(==) Gas Gas = True
+		(==) _ _ = False
+		
+		(/=) x y = not (x == y)
+		
+-- default methods
+interface Eq a where
+		(==): a -> a -> Bool
+		(/=): a -> a -> Bool
+		
+		(==) x y = not (x /= y)
+		(/=) x y = not (x == y)
 ```
 
