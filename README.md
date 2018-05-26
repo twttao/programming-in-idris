@@ -113,7 +113,7 @@ anyVect: (n ** Vect n String)			-- type inference
 ##### Type-level Calculation
 
 ```haskell
-	-- type calculation functions
+-- type calculation functions
 StringOrInt: Bool -> Type
 StringOrInt False = String
 StringOrInt True = Int
